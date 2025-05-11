@@ -1,33 +1,37 @@
-import {useState} from "react";
 import "milligram";
+import './App.css';
+import {useState} from "react";
 import LoginForm from "./LoginForm";
 
 function App() {
-    const [email, setEmail] = useState('fracz@agh.edu.pl');
-    const [authenticatedUserName, setAuthenticatedUserName] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(null);
 
-    function handleChange(event) {
-        setEmail(event.target.value);
+    function login(username) {
+        if (username) {
+            setLoggedIn(username);
+        }
+    }
+
+    function logout() {
+        setLoggedIn(null);
+    }
+
+    let content;
+    if (loggedIn) {
+        content = <div>
+            <h2>Witaj {loggedIn}!</h2>
+            <button onClick={logout}>Wyloguj</button>
+        </div>
+    } else {
+        content = <LoginForm onLogin={(username) =>login(username)}/>;
     }
 
     return (
         <div>
             <h1>System do zapisów na zajęcia</h1>
-            {!authenticatedUserName && (
-                <div>
-                    Zaloguj sie emailem
-                    <input type="text" value={email} onChange={handleChange}/>
-                    <button type="button" onClick={() => setAuthenticatedUserName(email)}>
-                        Wchodzę
-                    </button>
-                </div>
-            )}
-            {authenticatedUserName && (
-                <div><h4>Jestes zalogowany jako {authenticatedUserName}</h4>
-                    <a onClick={() => setAuthenticatedUserName(null)}>Wyloguj</a>
-                </div>
-            )}
-        </div>);
+            {content}
+        </div>
+    );
 }
 
 export default App;
