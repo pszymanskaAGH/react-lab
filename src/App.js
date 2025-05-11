@@ -3,7 +3,6 @@ import './App.css';
 import {useState} from "react";
 import LoginForm from "./LoginForm";
 import UserPanel from "./UserPanel";
-import MeetingsPage from "./meetings/MeetingsPage";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(null);
@@ -24,7 +23,7 @@ function App() {
             {
                 loggedIn ? <UserPanel username={loggedIn} onLogout={logout}/> : <LoginForm onLogin={login}/>
             }
-            <MeetingsPage/>
+
         </div>
     );
 }
