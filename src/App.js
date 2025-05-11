@@ -2,6 +2,7 @@ import "milligram";
 import './App.css';
 import {useState} from "react";
 import LoginForm from "./LoginForm";
+import UserPanel from "./UserPanel";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(null);
@@ -16,20 +17,14 @@ function App() {
         setLoggedIn(null);
     }
 
-    let content;
-    if (loggedIn) {
-        content = <div>
-            <h2>Witaj {loggedIn}!</h2>
-            <button onClick={logout}>Wyloguj</button>
-        </div>
-    } else {
-        content = <LoginForm onLogin={(username) =>login(username)}/>;
-    }
-
     return (
         <div>
             <h1>System do zapisów na zajęcia</h1>
-            {content}
+            {
+                loggedIn
+                    ? <UserPanel username={loggedIn} onLogout={logout}/>
+                    : <LoginForm onLogin={login}/>
+            }
         </div>
     );
 }
