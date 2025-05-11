@@ -3,6 +3,7 @@ import './App.css';
 import {useState} from "react";
 import LoginForm from "./LoginForm";
 import UserPanel from "./UserPanel";
+import MeetingsPage from "./meetings/MeetingsPage";
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(null);
@@ -21,10 +22,9 @@ function App() {
         <div>
             <h1>System do zapisów na zajęcia</h1>
             {
-                loggedIn
-                    ? <UserPanel username={loggedIn} onLogout={logout}/>
-                    : <LoginForm onLogin={login}/>
+                loggedIn ? <UserPanel username={loggedIn} onLogout={logout}/> : <LoginForm onLogin={login}/>
             }
+            <MeetingsPage/>
         </div>
     );
 }
